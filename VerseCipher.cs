@@ -62,7 +62,7 @@ class VerseCipher
         {
             if (!charToCodeMap.ContainsKey(ch))
             {
-                cipherText.Add("??/??");
+                //cipherText.Add();
                 continue;
             }
 
