@@ -55,21 +55,19 @@ class VerseCipher
 
     public string Encrypt(string message)
     {
-        Random rand = new Random();
-        List<string> cipherText = new List<string>();
+        var rand = new Random();
+        var cipherText = new List<string>();
 
         foreach (char ch in message)
         {
-            if (charToCodeMap.ContainsKey(ch))
-            {
-                List<string> codes = charToCodeMap[ch];
-                string selectedCode = codes[rand.Next(codes.Count)];
-                cipherText.Add(selectedCode);
-            }
-            else
+            if (!charToCodeMap.ContainsKey(ch))
             {
                 cipherText.Add("??/??");
+                continue;
             }
+
+            var codes = charToCodeMap[ch];
+            cipherText.Add(codes[rand.Next(codes.Count)]);
         }
 
         return string.Join(",", cipherText);
@@ -77,19 +75,18 @@ class VerseCipher
 
     public string Decrypt(string cipherText)
     {
-        string[] codes = cipherText.Split(',');
-        List<char> message = new List<char>();
+        var codes = cipherText.Split(',');
+        var message = new List<char>();
 
         foreach (string code in codes)
         {
-            if (codeToCharMap.ContainsKey(code))
-            {
-                message.Add(codeToCharMap[code]);
-            }
-            else
+            if (!codeToCharMap.ContainsKey(code))
             {
                 message.Add('?');
+                continue;
             }
+
+            message.Add(codeToCharMap[code]);
         }
 
         return new string(message.ToArray());
