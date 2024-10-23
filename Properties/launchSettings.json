@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BookCipher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "BookCipher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
